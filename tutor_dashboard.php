@@ -95,7 +95,7 @@
 							</div>
 							<div class="course-desc">
 								<p style="margin-bottom:0px;">Subject: <span class="font_color_change"> <?php echo $row['subject1']; ?></span>,<span class="font_color_change"> <?php echo $row['subject2']; ?></span>,<span class="font_color_change"> <?php echo $row['subject3']; ?></span></p>
-								<p style="margin-bottom:0px;">Class: <span class="font_color_change"> Above 10th</span></p>
+								<p style="margin-bottom:0px;">Class: <span class="font_color_change"> Above <?php echo $row['above_class']; ?></span></p>
 								<p style="margin-bottom:0px;">Average Fees:<span class="font_color_change"> <?php echo $row['average_tution_fees']; ?>/month</span></p>
 							</div>
 							<div class="course-rating " style="margin-bottom:5px;">

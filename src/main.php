@@ -95,4 +95,45 @@
 			}
 		}
 	}
+	else if(isset($_POST['academic_detail_submit']))
+	{
+		session_start();
+		$id=$_SESSION['user_id'];
+		$highest_qualification=$_POST['highest_qualification'];
+		$school=$_POST['school'];
+		$class_teaches=$_POST['class_teaches'];
+		$subject1=$_POST['subject1'];
+		$subject2=$_POST['subject2'];
+		$subject3=$_POST['subject3'];
+		$fees=$_POST['fees'];
+		$sql="SELECT * from user_information where user_id='$id';";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_num_rows($result);
+		if($row==0)
+		{
+			$sql="INSERT INTO user_information(`user_id`,`highest_qualification`,`recent_school`,`above_class`,`subject1`,`subject2`,`subject3`,`average_tution_fees`) VALUES ('$id','$highest_qualification','$school','$class_teaches','$subject1','$subject2','$subject3','$fees');";
+			$result=mysqli_query($con,$sql);
+			if($result)
+			{
+				header('location:../settings.php?msg=profile_updated');
+			}
+			else
+			{
+				header('location:../settings.php?msg=Error');
+			}
+		}
+		else
+		{
+			$sql="UPDATE user_information SET highest_qualification='$highest_qualification', recent_school='$school', above_class='$class_teaches', subject1='$subject1', subject2='$subject2', subject3='$subject3',average_tution_fees='$fees'  where user_id='$id';";
+			$result=mysqli_query($con,$sql);
+			if($result)
+			{
+				header('location:../settings.php?msg=profile_updated');
+			}
+			else
+			{
+				header('location:../settings.php?msg=Error');
+			}
+		}
+	}
 ?>

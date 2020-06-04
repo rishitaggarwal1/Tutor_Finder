@@ -209,36 +209,36 @@
 						<!-- Academics Details -->
 						<div class="tab-pane fade" id="tabs-text-2" role="tabpanel" aria-labelledby="tabs-text-2-tab">
 
-							<form action="src/main.php" method="post">
+						<form action="src/main.php" method="post">
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Highest Qualification:</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['highest_qualification']; ?>" value="<?php echo $row1['highest_qualification']; ?>" aria-describedby="emailHelp">
+						    <input type="text" name="highest_qualification" class="form-control" placeholder="<?php echo $row1['highest_qualification']; ?>" value="<?php echo $row1['highest_qualification']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">School in which you Teach:</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['recent_school']; ?>" value="<?php echo $row1['recent_school']; ?>" aria-describedby="emailHelp">
+						    <input type="text" name="school" class="form-control" placeholder="<?php echo $row1['recent_school']; ?>" value="<?php echo $row1['recent_school']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Class Above you Teach:</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['above_class']; ?>" value="<?php echo $row1['above_class']; ?>" aria-describedby="emailHelp">
+						    <input type="text" name="class_teaches" class="form-control" placeholder="<?php echo $row1['above_class']; ?>" value="<?php echo $row1['above_class']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Subject You Teach</label>
 						    <div class="row">
 						    	<div class="col-lg-4 col-md-4 col-sm-6 col-12">
-						    		<input type="text" class="form-control" placeholder="<?php echo $row1['subject1'];?>" value="<?php echo $row1['subject1']; ?>" aria-describedby="emailHelp">
+						    		<input type="text" name="subject1" class="form-control" placeholder="<?php echo $row1['subject1'];?>" value="<?php echo $row1['subject1']; ?>" aria-describedby="emailHelp">
 						    	</div>
 						    	<div class="col-lg-4 col-md-4 col-sm-6 col-12">
-						    		<input type="text" class="form-control" placeholder="<?php echo $row1['subject2'];?>" value="<?php echo $row1['subject2']; ?>" aria-describedby="emailHelp">
+						    		<input type="text" name="subject2" class="form-control" placeholder="<?php echo $row1['subject2'];?>" value="<?php echo $row1['subject2']; ?>" aria-describedby="emailHelp">
 						    	</div>
 						    	<div class="col-lg-4 col-md-4 col-sm-6 col-12">
-						    		<input type="text" class="form-control" placeholder="<?php echo $row1['subject3'];?>" value="<?php echo $row1['subject3']; ?>" aria-describedby="emailHelp">
+						    		<input type="text" name="subject3" class="form-control" placeholder="<?php echo $row1['subject3'];?>" value="<?php echo $row1['subject3']; ?>" aria-describedby="emailHelp">
 						    	</div>
 							</div>
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Average Tution Fees (Per Month):</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['average_tution_fees']; ?>" value="<?php echo $row1['average_tution_fees']; ?>" aria-describedby="emailHelp">
+						    <input type="text" name="fees" class="form-control" placeholder="<?php echo $row1['average_tution_fees']; ?>" value="<?php echo $row1['average_tution_fees']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Your Rating:</label>
