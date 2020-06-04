@@ -1,28 +1,4 @@
-/*------------------------------------------------------------------
-    Version: 1.0
--------------------------------------------------------------------*/
 
-
-/*------------------------------------------------------------------
-    [Table of contents]
-
-    1. DEFAULT VERSION (Check style.css and colors.css)
-    2. HOSTING VERSION
-    3. SEO VERSION
-    4. WATCH VERSION
-    5. APP VERSION
-    6. CLINIC VERSION
-    7. REAL ESTATE VERSION
-    8. POLITICS VERSION
-    9. BARBER VERSION
-    10. BUILDING VERSION
-
--------------------------------------------------------------------*/
-
-
-/*------------------------------------------------------------------
-    1. HOSTING VERSION
--------------------------------------------------------------------*/
 
 body.host_version .icon_wrap i,
 body.host_version .customwidget li i{
@@ -272,3 +248,7 @@ body.host_version .stat-wrap .alignleft {
     margin-right: 30px;
 }
 
+.font_color_change:hover
+{
+    color:#F1B641;
+}

@@ -6,13 +6,28 @@
 		$email=$_POST['login_email'];
 		$pass=$_POST['login_pass'];
 		$pass=md5($pass);
-		$sql="SELECT user_id from users where email_id='$email' AND password='$pass';";
+		$sql="SELECT * from users where email_id='$email' AND password='$pass';";
 		$result=mysqli_query($con,$sql);
 		if(mysqli_num_rows($result)==0)
 		{
 			header('location:../index.php?msg=wrong_credentials');
 		}
-		echo "1";
+		while($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+		{
+			$id=$row['user_id'];
+			$type=$row['type'];
+			if($type=="Tutor")
+			{
+				echo "1";
+			}
+			else
+			{
+				session_start();
+                $_SESSION['user_id'] = $id;
+				header("location:../student_dashboard.php?id=".$id);
+			}
+		}
+		
 	}
 	elseif (isset($_POST['register_btn']) && !empty($_POST['register_name']) && !empty($_POST['register_email']) && !empty($_POST['register_mobile']) && !empty($_POST['register_pass1'])) 
 	{
