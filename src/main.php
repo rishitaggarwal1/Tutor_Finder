@@ -56,5 +56,43 @@
 			header('location:../index.php?msg=email_already_exist');
 		}
 	}
-
+	elseif(isset($_POST['personal_detail_submit']))
+	{
+		session_start();
+		$id=$_SESSION['user_id'];
+		$sql="SELECT * from user_information where user_id='$id';";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_num_rows($result);
+		$gender=$_POST['gender'];
+		$about=$_POST['about'];
+		$address=$_POST['address'];
+		$district=$_POST['district'];
+		$state=$_POST['state'];
+		if($row==0)
+		{
+			$sql="INSERT INTO user_information(`user_id`,`gender`,`address`,`district`,`state`,`about`,`profile_image`) VALUES ('$id','$gender','$address','$district','$state','$about','1.jpg');";
+			$result=mysqli_query($con,$sql);
+			if($result)
+			{
+				header('location:../settings.php?msg=profile_updated');
+			}
+			else
+			{
+				header('location:../settings.php?msg=Error');
+			}
+		}
+		else
+		{
+			$sql="UPDATE user_information SET gender='$gender', address='$address', district='$district', state='$state', about='$about', profile_image='1.jpg' where user_id='$id';";
+			$result=mysqli_query($con,$sql);
+			if($result)
+			{
+				header('location:../settings.php?msg=profile_updated');
+			}
+			else
+			{
+				header('location:../settings.php?msg=Error');
+			}
+		}
+	}
 ?>

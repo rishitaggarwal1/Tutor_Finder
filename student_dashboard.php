@@ -2,6 +2,21 @@
 <?php
 	session_start();
 	include ('src/header.php');
+	$id=$_SESSION['user_id'];
+	$sql="SELECT * from users where user_id='$id';";
+	$result=mysqli_query($con,$sql);
+	$row=mysqli_fetch_assoc($result);
+	date_default_timezone_set("Asia/Calcutta");
+	$time=date("h");
+	$a_p=date("a");
+	if($time>5 && $time <12 && $a_p=="am")
+		$greet="Good Morning!";
+	else if($time>=0 && $time <6 && $a_p=="pm")
+		$greet="Good Afternoon!";
+	else if($time>=6 && $time <12 && $a_p=="pm")
+		$greet="Good Evening!";
+	else
+		$greet="Good Night!";
 ?>
 <body class="host_version"> 
     <!-- LOADER -->
@@ -75,9 +90,12 @@
     <div id="overviews" class="section wb">
         <div class="container">
             <div class="section-title row text-center">
+                <div class="section-title row text-center">
                 <div class="col-md-8 offset-md-2">
-                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
+                    <p class="lead font_color_change"><?php echo $greet; echo ' '.$row['name']; ?></p>
+                    <p>Study with our Top Rated Teacher.</p>
                 </div>
+            </div>
             </div><!-- end title -->
 
             <hr class="invis"> 

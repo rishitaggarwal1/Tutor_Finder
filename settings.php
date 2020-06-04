@@ -68,6 +68,42 @@
                     <p class="lead">Your Profile!</p>
                 </div>
             </div>
+            <?php
+            if(isset($_GET['msg']))
+            {
+            	$msg=$_GET['msg'];
+            	if($msg=="profile_updated")
+            	{
+            	?>
+            <div class="row justify-content-center">
+	            <div class="col-lg-8 col-md-8 col-sm-10 col-12">
+	            	<div class="alert alert-success alert-dismissible fade show" role="alert">
+					  <strong>Success!</strong> Your profile has successfully updated.
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+	            </div>
+	        </div>
+            	<?php
+            	}
+            	else if($msg=="Error")
+            	{
+            	?>
+            <div class="row justify-content-center">
+            	<div class="col-lg-8 col-md-8 col-sm-10 col-12">
+	            	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					  <strong>Error!</strong> Your profile has not updated.
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+	            </div>
+	        </div>
+            	<?php
+            	}
+            }
+            ?>
             <div class="row">
             		
             		<?php
@@ -139,7 +175,7 @@
 						  </div>
 							<div class="form-group">
 						    <label for="exampleInputEmail1">Gender:</label>
-								<select class="form-control" name="gender">
+								<select class="form-control" name="gender" value="<?php echo $row1['gender']; ?>">
 									<option value="" selected="selected" disabled="">Select</option>
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
@@ -147,19 +183,19 @@
 							</div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">About:</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['about']; ?>" value="<?php echo $row1['about']; ?>" aria-describedby="emailHelp">
+						    <input type="text" class="form-control" name="about" placeholder="<?php echo $row1['about']; ?>" value="<?php echo $row1['about']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Address:</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['address']; ?>" value="<?php echo $row1['address']; ?>" aria-describedby="emailHelp">
+						    <input type="text" class="form-control" name="address" placeholder="<?php echo $row1['address']; ?>" value="<?php echo $row1['address']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">District:</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['district']; ?>" value="<?php echo $row1['district']; ?>" aria-describedby="emailHelp">
+						    <input type="text" class="form-control" name="district" placeholder="<?php echo $row1['district']; ?>" value="<?php echo $row1['district']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">State:</label>
-						    <input type="text" class="form-control" placeholder="<?php echo $row1['state']; ?>" value="<?php echo $row1['state']; ?>" aria-describedby="emailHelp">
+						    <input type="text" class="form-control" name="state" placeholder="<?php echo $row1['state']; ?>" value="<?php echo $row1['state']; ?>" aria-describedby="emailHelp">
 						  </div>
 						  <div class="form-group">
 						    <label for="exampleInputEmail1">Profile Image:</label>
@@ -168,8 +204,8 @@
 						<div class="text-center">
 							<button class="btn btn-success" type="submit" name="personal_detail_submit" style="width:80%;">Submit</button>
 						</div>
-					</div>
 					</form>
+					</div>
 						<!-- Academics Details -->
 						<div class="tab-pane fade" id="tabs-text-2" role="tabpanel" aria-labelledby="tabs-text-2-tab">
 

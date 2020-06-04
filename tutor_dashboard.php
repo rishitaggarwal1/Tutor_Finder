@@ -68,8 +68,8 @@
         <div class="container">
             <div class="section-title row text-center">
                 <div class="col-md-8 offset-md-2">
-                    <p class="lead"><?php echo $greet; echo ' '.$row['name']; ?></p>
-                    <p>Here are some of our top rated teacher.</p>
+                    <p class="lead font_color_change"><?php echo $greet; echo ' '.$row['name']; ?></p>
+                    <p>Here are some of our Top Rated Teacher.</p>
                 </div>
             </div><!-- end title -->
 
