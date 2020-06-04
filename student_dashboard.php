@@ -1,5 +1,6 @@
+<!-- Copyright (c) Rishit Aggarwal -->
 <?php
-session_start();
+	session_start();
 	include ('src/header.php');
 ?>
 <body class="host_version"> 

@@ -1,3 +1,4 @@
+<!-- Copyright (c) Rishit Aggarwal -->
 <!-- Header File Linking -->
 <?php
 	include('src/header.php');

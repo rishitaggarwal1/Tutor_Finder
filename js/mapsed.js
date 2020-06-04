@@ -1,25 +1,10 @@
-/*jslint passfail: true, nomen: true, vars: true, white: true, indent: 2, maxerr: 999 */
-
 /*
- * Developed by : www.toepoke.co.uk
- *
- * If you redistribute this file, please keep this section in place
- *
- * License: Same as jQuery - see http://jquery.org/license
- *
- * Compressed with:
- *   - http://closure-compiler.appspot.com/
- *
- * History:
- *  v0.4 - Country wasn't supported
- * 
+  Copyright (c) Rishit Aggarwal
 */
 
 (function () {
-	// http://www.yuiblog.com/blog/2010/12/14/strict-mode-is-coming-to-town/
 	"use strict";
 
-	// singleton here (same variable across all instances of the plug-in)
 	var _version = '(0.4)',
 			_plugInName = "mapsed",
 			_plugInInstances = 1

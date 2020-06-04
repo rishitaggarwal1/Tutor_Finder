@@ -1,3 +1,4 @@
+<!-- Copyright (c) Rishit Aggarwal -->
 <?php
 	/*
 		database variables

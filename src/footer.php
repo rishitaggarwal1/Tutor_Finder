@@ -1,3 +1,4 @@
+<!-- Copyright (c) Rishit Aggarwal -->
 <div class="copyrights">
         <div class="container">
             <div class="footer-distributed">

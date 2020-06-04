@@ -1,3 +1,6 @@
+/*
+  Copyright (c) Rishit Aggarwal
+*/
 function runExample3() {
     $("#custom-places").mapsed({
 		showOnLoad: 	
