@@ -104,7 +104,7 @@
 							<div class="form-group">
 								<div class="col-sm-12">
 								<select class="form-control" name="register_type" required>
-									<option value="" selected="selected" disabled="">Select</option>
+									<option value="" selected="selected" disabled="">Type of Account</option>
 									<option value="Student">Student/Parent</option>
 									<option value="Tutor">Tutor</option>
 								</select>

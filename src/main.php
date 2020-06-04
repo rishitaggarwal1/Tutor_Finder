@@ -19,7 +19,9 @@
 			$type=$row['type'];
 			if($type=="Tutor")
 			{
-				echo "1";
+				session_start();
+                $_SESSION['user_id'] = $id;
+				header("location:../tutor_dashboard.php?id=".$id);
 			}
 			else
 			{
@@ -42,21 +44,7 @@
 		{
 			header('location:../index.php?msg=password_do_not_matched');
 		}
-		// $sql="SELECT * from users where email_id='$email';";
-		// $result=mysqli_query($con,$sql);
-		// if(mysqli_num_rows($result)>0)
-		// {
-		// 	header('location:../index.php?msg=email_already_exist');
-		// }
 		$user_id=time();
-		if($type=="Tutor")
-		{
-			$user_id="Tu_"+$user_id;
-		}
-		else
-		{
-			$user_id="S_"+$user_id;
-		}
 		$pass1=md5($pass1);
 		$sql ="INSERT INTO users (user_id,name,email_id,password,mobile,type) VALUES ('$user_id','$name','$email', '$pass1', '$mobile','$type');";
 		if (mysqli_query($con, $sql))
@@ -65,7 +53,7 @@
 		}
 		else
 		{
-			header('location:../index.php?msg=Error');
+			header('location:../index.php?msg=email_already_exist');
 		}
 	}
 
