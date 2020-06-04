@@ -2,6 +2,22 @@
 <?php
 	session_start();
 	include ('src/header.php');
+	include('db/db.php');
+	$id=$_SESSION['user_id'];
+	$sql="SELECT * from users where user_id='$id';";
+	$result=mysqli_query($con,$sql);
+	$row=mysqli_fetch_assoc($result);
+	date_default_timezone_set("Asia/Calcutta");
+	$time=date("h");
+	$a_p=date("a");
+	if($time>5 && $time <12 && $a_p=="am")
+		$greet="Good Morning!";
+	else if($time>=0 && $time <6 && $a_p=="pm")
+		$greet="Good Afternoon!";
+	else if($time>=6 && $time <12 && $a_p=="pm")
+		$greet="Good Evening!";
+	else
+		$greet="Good Night!";
 ?>
 <body class="host_version"> 
     <!-- LOADER -->
@@ -47,46 +63,22 @@
 			<h1>Best Tutor<span class="m_1">Find a way for your Success.</span></h1>
 		</div>
 	</div>
-
-<div class="row justify-content-center">
-	<div class="col-md-8 col-lg-8 col-12 col-sm-10">
-	<?php
-
-		if(isset($_GET['msg']))
-		{
-			$msg=$_GET['msg'];
-			if($msg=='successfully_sent')
-			{
-			?><br>
-				<div class="alert alert-success alert-dismissible text-center fade show" role="alert">
-				  <strong>Success!</strong> Your request has been sent. Please wait for the response.
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				    <span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
-			<?php
-			}
-		}
-
-	?>
-	</div>
-</div>
 	
     <div id="overviews" class="section wb">
         <div class="container">
             <div class="section-title row text-center">
                 <div class="col-md-8 offset-md-2">
-                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
+                    <p class="lead"><?php echo $greet; echo ' '.$row['name']; ?></p>
+                    <p>Here are some of our top rated teacher.</p>
                 </div>
             </div><!-- end title -->
 
             <hr class="invis"> 
-
             <div class="row">
 
             	<?php
             		include('db/db.php');
-            		$sql="Select * from user_information, users where user_information.user_id=users.user_id;";
+            		$sql="Select * from user_information, users where user_information.user_id=users.user_id ORDER BY rating DESC;";
             		$res=mysqli_query($con,$sql);
             		while($row=mysqli_fetch_array($res,MYSQLI_ASSOC))
             		{
