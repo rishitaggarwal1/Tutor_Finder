@@ -238,16 +238,14 @@ if (isset($_SESSION['user_id'])) {
 				</div>
 
 				<!-- Accepted Details Tab -->
-				  <div class="tab-pane fade show active" id="tabs-text-2" role="tabpane1" aria-labelledby="tabs-text-2-tab">
+				  <div class="tab-pane fade show" id="tabs-text-2" role="tabpane1" aria-labelledby="tabs-text-2-tab">
 				  	<div class="row">
 		            	<table class="table table-hover">
 						  <thead class="text-center">
 						    <tr>
-						      <th scope="col" style="width:20vw;vertical-align: top;">Student Name</th>
-						      <th scope="col" style="width:20vw;vertical-align: top;">Mobile Number</th>
+						      <th scope="col" style="width:30vw;vertical-align: top;">Student Name</th>
+						      <th scope="col" style="width:30vw;vertical-align: top;">Mobile Number</th>
 						      <th scope="col" style="width:30vw;vertical-align: top;">Email Id</th>
-						      <th scope="col" style="width:15vw;vertical-align: top;">Accept</th>
-						      <th scope="col" style="width:15vw;vertical-align: top;">Decline</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -265,11 +263,9 @@ if (isset($_SESSION['user_id'])) {
 						  		?>
 						  		<tr class="text-center font_color_change">
 						  			<input type="text" name="student_id" value="<?php echo $student_id; ?>" id="student_id<?php echo $i; ?>" hidden>
-						  			<td class="font_color_change" scope="col" style="width:20vw;vertical-align: top;"><?php echo $row1['name']; ?></td>
-						  			<td scope="col" style="width:20vw;vertical-align: top;"><?php echo $row1['mobile']; ?></td>
+						  			<td class="font_color_change" scope="col" style="width:30vw;vertical-align: top;"><?php echo $row1['name']; ?></td>
+						  			<td scope="col" style="width:30vw;vertical-align: top;"><?php echo $row1['mobile']; ?></td>
 						  			<td scope="col" style="width:30vw;vertical-align: top;"><?php echo $row1['email_id']; ?></td>
-						  			<td scope="col" style="width:15vw;vertical-align: top;"><button class="btn btn-success btn-sm accept_button" id="A_<?php echo $i; ?>">Accept</button></td>
-						  			<td scope="col" style="width:15vw;vertical-align: top;"><button id="D_<?php echo $i; ?>" class="btn btn-danger btn-sm decline_button">Decline</button></td>
 						  		</tr>
 						  		<?php
 						  		}
@@ -279,7 +275,7 @@ if (isset($_SESSION['user_id'])) {
 	            	</div>
 					</div>
 
-					<div class="tab-pane fade show active" id="tabs-text-3" role="tabpanel" aria-labelledby="tabs-text-3-tab">
+					<div class="tab-pane fade show" id="tabs-text-3" role="tabpanel" aria-labelledby="tabs-text-3-tab">
 						<div class="row">
 		            	<table class="table table-hover">
 						  <thead class="text-center">
@@ -287,8 +283,6 @@ if (isset($_SESSION['user_id'])) {
 						      <th scope="col" style="width:20vw;vertical-align: top;">Student Name</th>
 						      <th scope="col" style="width:20vw;vertical-align: top;">Mobile Number</th>
 						      <th scope="col" style="width:30vw;vertical-align: top;">Email Id</th>
-						      <th scope="col" style="width:15vw;vertical-align: top;">Accept</th>
-						      <th scope="col" style="width:15vw;vertical-align: top;">Decline</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -306,11 +300,9 @@ if (isset($_SESSION['user_id'])) {
 						  		?>
 						  		<tr class="text-center font_color_change">
 						  			<input type="text" name="student_id" value="<?php echo $student_id; ?>" id="student_id<?php echo $i; ?>" hidden>
-						  			<td class="font_color_change" scope="col" style="width:20vw;vertical-align: top;"><?php echo $row1['name']; ?></td>
-						  			<td scope="col" style="width:20vw;vertical-align: top;"><?php echo $row1['mobile']; ?></td>
+						  			<td class="font_color_change" scope="col" style="width:30vw;vertical-align: top;"><?php echo $row1['name']; ?></td>
+						  			<td scope="col" style="width:30vw;vertical-align: top;"><?php echo $row1['mobile']; ?></td>
 						  			<td scope="col" style="width:30vw;vertical-align: top;"><?php echo $row1['email_id']; ?></td>
-						  			<td scope="col" style="width:15vw;vertical-align: top;"><button class="btn btn-success btn-sm accept_button" id="A_<?php echo $i; ?>">Accept</button></td>
-						  			<td scope="col" style="width:15vw;vertical-align: top;"><button id="D_<?php echo $i; ?>" class="btn btn-danger btn-sm decline_button">Decline</button></td>
 						  		</tr>
 						  		<?php
 						  		}
