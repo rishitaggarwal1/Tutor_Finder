@@ -168,6 +168,24 @@
 		$sql="INSERT into tution_request (`tution_id`,`student_id`,`tutor_id`) VALUES ('$id','$user_id','$teacher_id');";
 		$result=mysqli_query($con,$sql);
 	}
+	else if(!empty($_POST['student_id_accept']))
+	{
+		session_start();
+		$id=$_SESSION['user_id'];
+		$sid=$_POST['student_id_accept'];
+		$val=1;
+		$sql="UPDATE tution_request SET `is_accepted`='$val' where `student_id`='$sid' AND `tutor_id`='$id';";
+		$res=mysqli_query($con,$sql);
+	}
+	else if(!empty($_POST['student_id_decline']))
+	{
+		session_start();
+		$id=$_SESSION['user_id'];
+		$sid=$_POST['student_id_decline'];
+		$val=-1;
+		$sql="UPDATE tution_request SET `is_accepted`='$val' where `student_id`='$sid' AND `tutor_id`='$id';";
+		$res=mysqli_query($con,$sql);
+	}
 	else if(isset($_POST['logout']))
 	{
 	    session_start();

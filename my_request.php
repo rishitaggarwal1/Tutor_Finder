@@ -184,7 +184,7 @@ if (isset($_SESSION['user_id'])) {
 				  </thead>
 				  <tbody>
 				  	<?php
-				  		$sql="SELECT * from tution_request where tutor_id='$id';";
+				  		$sql="SELECT * from tution_request where tutor_id='$id' AND is_accepted=0;";
 				  		$result=mysqli_query($con,$sql);
 				  		$i=0;
 				  		while($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
@@ -196,12 +196,12 @@ if (isset($_SESSION['user_id'])) {
 				  			$row1=mysqli_fetch_assoc($res);
 				  		?>
 				  		<tr class="text-center font_color_change">
-				  			<input type="text" name="student_id" id="student_id<?php echo $i; ?>" hidden>
+				  			<input type="text" name="student_id" value="<?php echo $student_id; ?>" id="student_id<?php echo $i; ?>" hidden>
 				  			<td class="font_color_change" scope="col" style="width:20vw;vertical-align: top;"><?php echo $row1['name']; ?></td>
 				  			<td scope="col" style="width:20vw;vertical-align: top;"><?php echo $row1['mobile']; ?></td>
 				  			<td scope="col" style="width:30vw;vertical-align: top;"><?php echo $row1['email_id']; ?></td>
-				  			<td scope="col" style="width:15vw;vertical-align: top;"><button class="btn btn-success btn-sm" id="A_<?php echo $i; ?>">Accept</button></td>
-				  			<td scope="col" style="width:15vw;vertical-align: top;"><button id="D_<?php echo $i; ?>" class="btn btn-danger btn-sm">Decline</button></td>
+				  			<td scope="col" style="width:15vw;vertical-align: top;"><button class="btn btn-success btn-sm accept_button" id="A_<?php echo $i; ?>">Accept</button></td>
+				  			<td scope="col" style="width:15vw;vertical-align: top;"><button id="D_<?php echo $i; ?>" class="btn btn-danger btn-sm decline_button">Decline</button></td>
 				  		</tr>
 				  		<?php
 				  		}
@@ -223,5 +223,37 @@ if (isset($_SESSION['user_id'])) {
     <?php
     	include('src/footer.php');
     ?>
+    <script>
+        $('.accept_button').click(function(e) {
+            e.preventDefault();
+            var opt = $(this).attr('id');
+           	var str=opt.substring(2);
+            var student_id_accept = $('#student_id' + str).val();
+            $.ajax({
+                url: "src/main.php",
+                type: "POST",
+                data: {student_id_accept: student_id_accept},
+                success: function(data) {
+                	location.reload();
+                }
+            });
+        });
+    </script>
+    <script>
+        $('.decline_button').click(function(e) {
+            e.preventDefault();
+            var opt = $(this).attr('id');
+           	var str=opt.substring(2);
+            var student_id_decline = $('#student_id' + str).val();
+            $.ajax({
+                url: "src/main.php",
+                type: "POST",
+                data: {student_id_decline: student_id_decline},
+                success: function(data) {
+                	location.reload();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
