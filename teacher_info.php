@@ -181,7 +181,7 @@
 									</div>
 									<div class="col-md-12 col-lg-12 col-sm-12 col-12">
 										<div class="form-group">
-											<textarea class="form-control" name="commenter-message" placeholder="Message" id="commenter-message" cols="30" rows="2"></textarea>
+											<textarea class="form-control" name="message" placeholder="Message" id="message" cols="30" rows="2"></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 post-btn">
