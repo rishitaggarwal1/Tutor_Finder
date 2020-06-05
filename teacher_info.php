@@ -18,6 +18,14 @@
 		header('location:student_dashboard.php');
 	}
 	include('db/db.php');
+	$sql="SELECT * from users where user_id='$id';";
+	$result=mysqli_query($con,$sql);
+	$row=mysqli_fetch_assoc($result);
+	$type=$row['type'];
+	if($type=="Student")
+		$dashboard="student_dashboard.php";
+	else
+		$dashboard="tutor_dashboard.php";
 ?>
 <body class="host_version"> 
     <!-- LOADER -->
@@ -45,12 +53,14 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="student_dashboard.php">Home</a></li>
+						<li class="nav-item active"><a class="nav-link" href="<?php echo $dashboard; ?>">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="my_request.php">Requests</a></li>
 						<li class="nav-item"><a class="nav-link" href="settings.php">Settings</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log" href="index.php""><span>LOG OUT</span></a></li>
+                        <form action="src/main.php" method="post">
+                        	<li><button type="submit" style="padding: 0px;" name="logout"><a class="hover-btn-new log"><span>LOG OUT</span></a></button></li>
+                    	</form>
                     </ul>
 				</div>
 			</div>
@@ -190,21 +200,30 @@
 						</div>
 					</div>
 					<div class="course-rating text-center" style="margin-bottom:5px;">
-						<span class="font_color_change">
-							<?php
-							for ($x = 0; $x <$row['rating']; $x++)
+								Rating: <span class="font_color_change"><?php 
+
+									for ($x = 0; $x <$row['rating']; $x++)
 									{
 									?>
 										<i class="fa fa-star"></i>
 									<?php
 									}
-									?>
-						</span>							
-					</div>
-
+									echo ' (*';
+									echo $row['people_rated'];
+									echo ' )';
+								?></span>							
+							</div>
+				<?php
+					if($type=="Student")
+					{
+					?>
 					<div>
 						<button class="btn btn-primary" style="width:100%;" name="get_teacher_info">Request for Demo</button>
 					</div>
+
+					<?php
+					}
+				?>
 					<br>
 					<div class="widget-categories">
 						<h3 class="widget-title">Subject:</h3>

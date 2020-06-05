@@ -148,7 +148,7 @@ if (isset($_SESSION['user_id'])) {
 							</div>
 							<form>
 								<div>
-									<button class="btn btn-success" style="width:100%;"><a href="<?php echo 'teacher_info.php?view_id='; echo $row['user_id']; ?>" style="color:white;">View Details</a></button>
+									<button class="btn btn-success" style="width:100%;"><a style="width:100%; color:white;" href="<?php echo 'teacher_info.php?view_id='; echo $row['user_id']; ?>" style="color:white;">View Details</a></button>
 								</div>
 								<br>
 								<div>

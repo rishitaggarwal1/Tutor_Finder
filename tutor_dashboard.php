@@ -118,7 +118,7 @@
 								?></span>							
 							</div>
 							<div>
-								<button class="btn btn-primary" style="width:100%;">Request for Demo</button>
+								<button class="btn btn-success" style="width:100%;"><a style="width:100%; color:white;" href="<?php echo 'teacher_info.php?view_id='; echo $row['user_id']; ?>" style="color:white;">View Details</a></button>
 							</div>
 						</div>
 						<div class="course-meta-bot">
