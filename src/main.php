@@ -136,6 +136,29 @@
 			}
 		}
 	}
+	else if(isset($_POST['teacher_rating']) && !empty($_POST['rating']))
+	{
+		$id=$_POST['teacherid'];
+		$sql="SELECT rating, people_rated from user_information where user_id='$id';";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_fetch_assoc($result);
+		$people=$row['people_rated'];
+		$rating=$row['rating']*$people+$_POST['rating'];
+		$people++;
+		$rating=floor($rating/$people);
+		$sql="UPDATE user_information SET rating='$rating', people_rated='$people' where user_id='$id';";
+		$result=mysqli_query($con,$sql);
+		if($result)
+		{
+			$url='location:../teacher_info.php?view_id='.$id.'&msg=successfully_given_feedback';
+			header($url);
+		}
+		else
+		{
+			$url='location:../teacher_info.php?view_id='.$id.'&msg=Error';
+			header($url);
+		}
+	}
 	else if(isset($_POST['logout']))
 	{
 	    session_start();

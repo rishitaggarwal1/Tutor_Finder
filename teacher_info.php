@@ -2,87 +2,24 @@
 <?php
 	session_start();
 	include ('src/header.php');
+	if (isset($_SESSION['user_id'])) {
+	} 
+	else {
+    	header("Location:index.php");
+    	exit();
+	} 
 	$id=$_SESSION['user_id'];
+	if(isset($_GET['view_id']))
+	{
+		$teacher_id=$_GET['view_id'];
+	}
+	else
+	{
+		header('location:student_dashboard.php');
+	}
+	include('db/db.php');
 ?>
 <body class="host_version"> 
-
-	<!-- Modal -->
-	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header tit-up">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Customer Login</h4>
-			</div>
-			<div class="modal-body customer-box">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs">
-					<li><a class="active" href="#Login" data-toggle="tab">Login</a></li>
-					<li><a href="#Registration" data-toggle="tab">Registration</a></li>
-				</ul>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div class="tab-pane active" id="Login">
-						<form role="form" class="form-horizontal">
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input class="form-control" id="email1" placeholder="Name" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input class="form-control" id="exampleInputPassword1" placeholder="Email" type="email">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-10">
-									<button type="submit" class="btn btn-light btn-radius btn-brd grd1">
-										Submit
-									</button>
-									<a class="for-pwd" href="javascript:;">Forgot your password?</a>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="tab-pane" id="Registration">
-						<form role="form" class="form-horizontal">
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input class="form-control" placeholder="Name" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input class="form-control" id="email" placeholder="Email" type="email">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input class="form-control" id="mobile" placeholder="Mobile" type="email">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input class="form-control" id="password" placeholder="Password" type="password">
-								</div>
-							</div>
-							<div class="row">							
-								<div class="col-sm-10">
-									<button type="button" class="btn btn-light btn-radius btn-brd grd1">
-										Save &amp; Continue
-									</button>
-									<button type="button" class="btn btn-light btn-radius btn-brd grd1">
-										Cancel</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	  </div>
-	</div>
-
     <!-- LOADER -->
 	<div id="preloader">
 		<div class="loader-container">
@@ -120,13 +57,56 @@
 		</nav>
 	</header>
 	<!-- End header -->
-	
+	<?php
+		$sql="SELECT * from users, user_information where users.user_id='$teacher_id' AND users.user_id=user_information.user_id;";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_fetch_assoc($result);
+	?>
 	<div class="all-title-box">
 		<div class="container text-center">
 			<h1>Teacher Information<span class="m_1">Check the complete information.</span></h1>
 		</div>
 	</div>
-	
+	<br>
+	<?php
+		if(isset($_GET['msg']))
+		{
+			$msg=$_GET['msg'];
+			if($msg=="successfully_given_feedback")
+			{
+			?>
+
+			<div class="row justify-content-center">
+	            <div class="col-lg-8 col-md-8 col-sm-10 col-12">
+	            	<div class="alert alert-success alert-dismissible fade show" role="alert">
+					  <strong>Success!</strong> Your feedback has successfully sent.
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+	            </div>
+	        </div>
+
+			<?php
+			}
+			else if($msg=="Error")
+			{
+			?>
+			<div class="row justify-content-center">
+            	<div class="col-lg-8 col-md-8 col-sm-10 col-12">
+	            	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					  <strong>Error!</strong> Your feedback has not sent.
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+	            </div>
+	        </div>
+			<?php
+			}
+		}
+	?>
+
     <div id="overviews" class="section wb">
         <div class="container">
             <div class="row"> 
@@ -134,7 +114,7 @@
                     <div class="blog-item">
 						<div class="post-content">
 							<div class="post-date">
-								<span class="day">Rs 5000</span>
+								<span class="day">Rs <?php echo $row['average_tution_fees']; ?></span>
 								<span class="month">/ Month</span>
 							</div>
 							<!-- <div class="meta-info-blog">
@@ -144,26 +124,26 @@
 							</div> -->
 							<div class="blog-title">
 								<div class="course-title">
-									<h1 class="font_color_change" style="font-weight: bold;">Rishit Aggarwal (B.Tech)</h1>
+									<h1 class="font_color_change" style="font-weight: bold;"><?php echo $row['name']; echo ' ( '; echo $row['highest_qualification']; echo ' )'; ?></h1>
 								</div>
 							</div>
 							<div class="blog-desc">
-								<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no quo maiorum intel ogrets geuiat operts elicata libere avisse id cumlegebat, liber regione eu sit.... </p>
+								<p><?php echo $row['about']; ?></p>
 								<blockquote class="default">
-									<p style="margin-bottom:0px;"><b>Gender: </b><span class="font_color_change">Male</span></p>
-									<p style="margin-bottom:0px;"><b>School Teaches In: </b><span class="font_color_change">Arya Senior Secondary School</span></p>
-									<p style="margin-bottom:0px;"><b>Class He Teaches: </b><span class="font_color_change">Above 10th</span></p>
+									<p style="margin-bottom:0px;"><b>Gender: </b><span class="font_color_change"><?php echo $row['gender']; ?></span></p>
+									<p style="margin-bottom:0px;"><b>School Teaches In: </b><span class="font_color_change"><?php echo $row['recent_school']; ?></span></p>
+									<p style="margin-bottom:0px;"><b>Class He Teaches: </b><span class="font_color_change">Above <?php echo $row['above_class']; ?></span></p>
 								</blockquote>
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-1"></div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-10">
-										<p class="font_color_change" style="margin-bottom:0px;">Rupesh Electrical and Works, Railway Road, Gharaunda</p>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-10 text-center">
+										<p class="font_color_change" style="margin-bottom:0px;"><?php echo $row['address']; ?></p>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-1"></div>
 									<div class="col-lg-6 col-md-6 col-sm-6 col-10 text-center">
-										<p><span class="font_color_change">Karnal</span> <span class="font_color_change">Haryana</span></p>
+										<p><span class="font_color_change"><?php echo $row['district']; ?></span> <span class="font_color_change"><?php echo $row['state']; ?></span></p>
 									</div>
 								</div>
 							</div>							
@@ -174,11 +154,12 @@
 					<div class="comments-form">
 						<h4>Give Your Valueable Feedback</h4>
 						<div class="comment-form-main">
-							<form action="#">
+							<form action="src/main.php" method="post">
 								<div class="row">
 									<div class="col-md-12 col-sm-12 col-lg-12 col-12">
+										<input type="text" name="teacherid" hidden value="<?php echo $row['user_id']; ?>">
 										<div class="form-group">
-											<select class="form-control" name="gender" value="<?php echo $row1['gender']; ?>">
+											<select class="form-control" name="rating"required>
 												<option value="" selected="selected" disabled="">Rating</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
@@ -194,7 +175,7 @@
 										</div>
 									</div>
 									<div class="col-md-12 post-btn">
-										<button class="hover-btn-new orange"><span>Send</span></button>
+										<button class="hover-btn-new orange" type="submit" name="teacher_rating"><span>Send</span></button>
 									</div>
 								</div>
 							</form>
@@ -210,11 +191,21 @@
 					</div>
 					<div class="course-rating text-center" style="margin-bottom:5px;">
 						<span class="font_color_change">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
+							<?php
+							for ($x = 0; $x <$row['rating']; $x++)
+									{
+									?>
+										<i class="fa fa-star"></i>
+									<?php
+									}
+									?>
 						</span>							
 					</div>
+
+					<div>
+						<button class="btn btn-primary" style="width:100%;" name="get_teacher_info">Request for Demo</button>
+					</div>
+					<br>
 					<div class="widget-categories">
 						<h3 class="widget-title">Subject:</h3>
 						<ul>

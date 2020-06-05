@@ -1,6 +1,11 @@
 <!-- Copyright (c) Rishit Aggarwal -->
 <?php
 	session_start();
+	if (isset($_SESSION['user_id'])) {
+} else {
+    header("Location:index.php");
+    exit();
+} 
 	include ('src/header.php');
 	include('db/db.php');
 	$id=$_SESSION['user_id'];
@@ -99,7 +104,7 @@
 								<p style="margin-bottom:0px;">Average Fees:<span class="font_color_change"> <?php echo $row['average_tution_fees']; ?>/month</span></p>
 							</div>
 							<div class="course-rating " style="margin-bottom:5px;">
-								Rating: <span class="font_color_change"><?php echo $row['rating']; 
+								Rating: <span class="font_color_change"><?php 
 
 									for ($x = 0; $x <$row['rating']; $x++)
 									{
@@ -107,6 +112,9 @@
 										<i class="fa fa-star"></i>
 									<?php
 									}
+									echo ' (*';
+									echo $row['people_rated'];
+									echo ' )';
 								?></span>							
 							</div>
 							<div>

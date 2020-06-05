@@ -112,7 +112,7 @@ if (isset($_SESSION['user_id'])) {
 
             	<?php
             		include('db/db.php');
-            		$sql="Select * from user_information, users where user_information.user_id=users.user_id;";
+            		$sql="Select * from user_information, users where user_information.user_id=users.user_id ORDER BY rating DESC;";
             		$res=mysqli_query($con,$sql);
             		while($row=mysqli_fetch_array($res,MYSQLI_ASSOC))
             		{
@@ -133,7 +133,7 @@ if (isset($_SESSION['user_id'])) {
 								<p style="margin-bottom:0px;">Average Fees:<span class="font_color_change"> <?php echo $row['average_tution_fees']; ?>/month</span></p>
 							</div>
 							<div class="course-rating " style="margin-bottom:5px;">
-								Rating: <span class="font_color_change"><?php echo $row['rating']; 
+								Rating: <span class="font_color_change"><?php 
 
 									for ($x = 0; $x <$row['rating']; $x++)
 									{
@@ -141,11 +141,21 @@ if (isset($_SESSION['user_id'])) {
 										<i class="fa fa-star"></i>
 									<?php
 									}
+									echo ' (*';
+									echo $row['people_rated'];
+									echo ' )';
 								?></span>							
 							</div>
-							<div>
-								<button class="btn btn-primary" style="width:100%;">Request for Demo</button>
-							</div>
+							<form>
+								<div>
+									<button class="btn btn-success" style="width:100%;"><a href="<?php echo 'teacher_info.php?view_id='; echo $row['user_id']; ?>" style="color:white;">View Details</a></button>
+								</div>
+								<br>
+								<div>
+									<input type="text" name="teacher_id" value="<?php echo $row['user_id']; ?>" hidden>
+									<button class="btn btn-primary" style="width:100%;" name="get_teacher_info" type="submit">Request for Demo</button>
+								</div>
+							</form>
 						</div>
 						<div class="course-meta-bot">
 							<ul>
