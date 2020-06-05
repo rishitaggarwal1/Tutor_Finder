@@ -1,6 +1,12 @@
 <!-- Copyright (c) Rishit Aggarwal -->
 <?php
 	session_start();
+	if (isset($_SESSION['user_id'])) 
+		{} 
+	else {
+    	header("Location:index.php");
+    exit();
+} 
 	include ('src/header.php');
 	$id=$_SESSION['user_id'];
 	include('db/db.php');

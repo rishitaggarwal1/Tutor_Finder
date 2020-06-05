@@ -1,6 +1,12 @@
 <!-- Copyright (c) Rishit Aggarwal -->
-<?php
+<?php 
+	include 'db/db.php';
 	session_start();
+if (isset($_SESSION['user_id'])) {
+} else {
+    header("Location:index.php");
+    exit();
+}  
 	include ('src/header.php');
 	$id=$_SESSION['user_id'];
 	$sql="SELECT * from users where user_id='$id';";
@@ -49,7 +55,9 @@
 						<li class="nav-item"><a class="nav-link" href="settings.php">Settings</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log" href="index.php""><span>LOG OUT</span></a></li>
+						<form action="src/main.php" method="post">
+                        	<li><button type="submit" style="padding: 0px;" name="logout"><a class="hover-btn-new log"><span>LOG OUT</span></a></button></li>
+                    	</form>
                     </ul>
 				</div>
 			</div>

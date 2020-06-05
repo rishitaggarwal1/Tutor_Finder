@@ -3,7 +3,7 @@
         <div class="container">
             <div class="footer-distributed">
                 <div class="footer-center">                   
-                    <p class="footer-company-name">All Rights Reserved. &copy; 2020 Design and Developed By : <a href="https://www.linkedin.com/in/rishit-aggarwal-372098180/">Rishit Aggarwal</a></p>
+                    <p class="footer-company-name">All Rights Reserved. &copy; <?php echo date('Y'); ?> Design and Developed By : <a href="https://www.linkedin.com/in/rishit-aggarwal-372098180/">Rishit Aggarwal</a></p>
                 </div>
             </div>
         </div><!-- end container -->
