@@ -217,9 +217,27 @@
 					if($type=="Student")
 					{
 					?>
-					<div>
-						<button class="btn btn-primary" style="width:100%;" name="get_teacher_info">Request for Demo</button>
-					</div>
+						<div>
+						<input type="text" name="teacher_id" value="<?php echo $row['user_id']; ?>" id="teacher_id" hidden>
+								<?php 
+								$teacher_id=$_GET['view_id'];
+								$s="SELECT * from tution_request where student_id='$id' AND tutor_id='$teacher_id' AND is_accepted=0;";
+            					$res=mysqli_query($con,$s);
+									if(mysqli_num_rows($res)==0)
+									{
+									?>
+										<button class="btn btn-primary request_tution" id="1" style="width:100%;" name="get_teacher_info" type="submit">Request for Demo</button>
+									<?php
+									}
+									else
+									{
+									?>
+										<button class="btn btn-secondary" style="width:100%;" name="get_teacher_info" type="submit">Already Sent</button>
+									<?php
+									}
+								?>
+									
+								</div>
 
 					<?php
 					}
@@ -240,6 +258,20 @@
     <?php
     	include 'src/footer.php';
     ?>
+    <script>
+        $('.request_tution').click(function(e) {
+            e.preventDefault();
+            var teacher_id = $('#teacher_id').val();
+            $.ajax({
+                url: "src/main.php",
+                type: "POST",
+                data: {teacher_id: teacher_id},
+                success: function(data) {
+                	location.reload();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

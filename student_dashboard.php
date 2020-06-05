@@ -114,8 +114,13 @@ if (isset($_SESSION['user_id'])) {
             		include('db/db.php');
             		$sql="Select * from user_information, users where user_information.user_id=users.user_id ORDER BY rating DESC;";
             		$res=mysqli_query($con,$sql);
+            		$i=0;
             		while($row=mysqli_fetch_array($res,MYSQLI_ASSOC))
             		{
+            			$teacher_id=$row['user_id'];
+            			$i++;
+            			$s="SELECT * from tution_request where student_id='$id' AND tutor_id='$teacher_id' AND is_accepted=0;";
+            			$result=mysqli_query($con,$s);
             		?>
 
             	<div class="col-lg-4 col-md-6 col-12" style="margin-bottom: 20px;">
@@ -146,16 +151,28 @@ if (isset($_SESSION['user_id'])) {
 									echo ' )';
 								?></span>							
 							</div>
-							<form>
 								<div>
 									<button class="btn btn-success" style="width:100%;"><a style="width:100%; color:white;" href="<?php echo 'teacher_info.php?view_id='; echo $row['user_id']; ?>" style="color:white;">View Details</a></button>
 								</div>
 								<br>
 								<div>
-									<input type="text" name="teacher_id" value="<?php echo $row['user_id']; ?>" hidden>
-									<button class="btn btn-primary" style="width:100%;" name="get_teacher_info" type="submit">Request for Demo</button>
+									<input type="text" name="teacher_id" value="<?php echo $row['user_id']; ?>" id="teacher_id<?php echo $i; ?>" hidden>
+								<?php 
+									if(mysqli_num_rows($result)==0)
+									{
+									?>
+										<button class="btn btn-primary request_tution" id="<?php echo $i; ?>" style="width:100%;" name="get_teacher_info" type="submit">Request for Demo</button>
+									<?php
+									}
+									else
+									{
+									?>
+										<button class="btn btn-secondary" style="width:100%;" name="get_teacher_info" type="submit">Already Sent</button>
+									<?php
+									}
+								?>
+									
 								</div>
-							</form>
 						</div>
 						<div class="course-meta-bot">
 							<ul>
@@ -177,6 +194,21 @@ if (isset($_SESSION['user_id'])) {
     <?php
     	include('src/footer.php');
     ?>
+    <script>
+        $('.request_tution').click(function(e) {
+            e.preventDefault();
+            var opt = $(this).attr('id');
+            var teacher_id = $('#teacher_id' + opt).val();
+            $.ajax({
+                url: "src/main.php",
+                type: "POST",
+                data: {teacher_id: teacher_id},
+                success: function(data) {
+                	location.reload();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

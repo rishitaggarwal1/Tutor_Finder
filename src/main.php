@@ -159,6 +159,15 @@
 			header($url);
 		}
 	}
+	else if(isset($_POST['teacher_id']))
+	{
+		session_start();
+		$user_id=$_SESSION['user_id'];
+		$teacher_id=$_POST['teacher_id'];
+		$id=time();
+		$sql="INSERT into tution_request (`tution_id`,`student_id`,`tutor_id`) VALUES ('$id','$user_id','$teacher_id');";
+		$result=mysqli_query($con,$sql);
+	}
 	else if(isset($_POST['logout']))
 	{
 	    session_start();
