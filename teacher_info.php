@@ -1,12 +1,16 @@
 <!-- Copyright (c) Rishit Aggarwal -->
 <?php
 	session_start();
-	include ('src/header.php');
 	if (isset($_SESSION['user_id'])) {
+		if(time()-$_SESSION['time']>600)
+		{
+			header('location:index.php');
+		}
+		else{}
 	} 
 	else {
     	header("Location:index.php");
-    	exit();
+    exit();
 	} 
 	$id=$_SESSION['user_id'];
 	if(isset($_GET['view_id']))

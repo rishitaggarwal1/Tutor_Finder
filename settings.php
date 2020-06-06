@@ -1,12 +1,17 @@
 <!-- Copyright (c) Rishit Aggarwal -->
 <?php
 	session_start();
-	if (isset($_SESSION['user_id'])) 
-		{} 
+	if (isset($_SESSION['user_id'])) {
+		if(time()-$_SESSION['time']>600)
+		{
+			header('location:index.php');
+		}
+		else{}
+	} 
 	else {
     	header("Location:index.php");
     exit();
-} 
+	} 
 	include ('src/header.php');
 	$id=$_SESSION['user_id'];
 	include('db/db.php');

@@ -21,12 +21,14 @@
 			{
 				session_start();
                 $_SESSION['user_id'] = $id;
+                $_SESSION['time']=time();
 				header("location:../tutor_dashboard.php?id=".$id);
 			}
 			else
 			{
 				session_start();
                 $_SESSION['user_id'] = $id;
+                $_SESSION['time']=time();
 				header("location:../student_dashboard.php?id=".$id);
 			}
 		}

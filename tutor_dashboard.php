@@ -2,10 +2,16 @@
 <?php
 	session_start();
 	if (isset($_SESSION['user_id'])) {
-} else {
-    header("Location:index.php");
+		if(time()-$_SESSION['time']>600)
+		{
+			header('location:index.php');
+		}
+		else{}
+	} 
+	else {
+    	header("Location:index.php");
     exit();
-} 
+	} 
 	include ('src/header.php');
 	include('db/db.php');
 	$id=$_SESSION['user_id'];

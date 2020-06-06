@@ -2,11 +2,17 @@
 <?php 
 	include 'db/db.php';
 	session_start();
-if (isset($_SESSION['user_id'])) {
-} else {
-    header("Location:index.php");
+	if (isset($_SESSION['user_id'])) {
+		if(time()-$_SESSION['time']>600)
+		{
+			header('location:index.php');
+		}
+		else{}
+	} 
+	else {
+    	header("Location:index.php");
     exit();
-}  
+	}   
 	include ('src/header.php');
 	$id=$_SESSION['user_id'];
 	$sql="SELECT * from users where user_id='$id';";
