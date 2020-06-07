@@ -1,6 +1,11 @@
 <!-- Copyright (c) Rishit Aggarwal -->
 <?php
 	include('../db/db.php');
+	use PHPMailer\PHPMailer\PHPMailer;
+
+    include './PHPMailer/PHPMailer.php';
+    include './PHPMailer/Exception.php';
+    include './PHPMailer/SMTP.php';
 	// Login Option
 	if(isset($_POST['login_btn']) && !empty($_POST['login_email']) && !empty($_POST['login_pass']))
 	{
@@ -187,6 +192,38 @@
 		$val=-1;
 		$sql="UPDATE tution_request SET `is_accepted`='$val' where `student_id`='$sid' AND `tutor_id`='$id';";
 		$res=mysqli_query($con,$sql);
+	}
+	else if($_POST['send_email'])
+	{
+		$fname=$_POST['first_name'];
+		$lname=$_POST['last_name'];
+		$email=$_POST['email'];
+		$phone=$_POST['phone'];
+		$body=$_POST['comments'];
+		$name=$fname.' '.$lname;
+		$subject="Query from Tutor-Finder";
+		
+		$mail = new PHPMailer();
+
+		//SMTP settings
+		$mail->isSMTP();
+		$mail->Host='smtp.gmail.com';
+		$mail->SMTPAuth=true;
+		$mail->Username='your_email@gmail.com';
+		$mail->Password='password';
+		$mail->Port=465;
+		$mail->SMTPSecure='ssl';
+
+		//Email Settings
+		$mail->From = "tutor_finder@gmail.com";
+        $mail->FromName = 'No-Reply';
+		$mail->addAddress("rishitaggarwal1@gmail.com");
+		$mail->Subject=$subject;
+		$mail->Body=$body;
+		if($mail->send())
+			header('location:../contact_us.php?msg=mail_sent_successfully');
+		else
+			header('location:../contact_us.php?msg=Error');
 	}
 	else if(isset($_POST['logout']))
 	{

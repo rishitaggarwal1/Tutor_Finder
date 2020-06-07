@@ -21,6 +21,7 @@
 	{
 		header('location:student_dashboard.php');
 	}
+	include ('src/header.php');
 	include('db/db.php');
 	$sql="SELECT * from users where user_id='$id';";
 	$result=mysqli_query($con,$sql);
@@ -250,9 +251,9 @@
 					<div class="widget-categories">
 						<h3 class="widget-title">Subject:</h3>
 						<ul>
-							<li><a href="#">Physics</a></li>
-							<li><a href="#">Chemistry</a></li>
-							<li><a href="#">Maths</a></li>
+							<li><a href="#"><?php echo $row['subject1']; ?></a></li>
+							<li><a href="#"><?php echo $row['subject2']; ?></a></li>
+							<li><a href="#"><?php echo $row['subject3']; ?></a></li>
 						</ul>
 					</div>
 				</div>

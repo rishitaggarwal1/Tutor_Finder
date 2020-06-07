@@ -117,23 +117,6 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="about.php">About Us</a></li>
-						<!-- <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Course </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="course-grid-2.html">Course Grid 2 </a>
-								<a class="dropdown-item" href="course-grid-3.html">Course Grid 3 </a>
-								<a class="dropdown-item" href="course-grid-4.html">Course Grid 4 </a>
-							</div>
-						</li> -->
-						<!-- <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="blog.html">Blog </a>
-								<a class="dropdown-item" href="blog-single.html">Blog single </a>
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="teachers.html">Teachers</a></li>
-						<li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li> -->
 						<li class="nav-item active"><a class="nav-link" href="contact_us.php">Contact</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -151,6 +134,46 @@
 		</div>
 	</div>
 	
+	<?php
+		if(isset($_GET['msg']))
+		{
+			$msg=$_GET['msg'];
+			if($msg=="mail_sent_successfully")
+			{
+			?>
+			<br>
+			<div class="row justify-content-center text-center">
+	            <div class="col-lg-8 col-md-8 col-sm-10 col-12">
+	            	<div class="alert alert-success alert-dismissible fade show" role="alert">
+					  <strong>Success!</strong> Your query has successfully sent.
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+	            </div>
+	        </div>
+
+			<?php
+			}
+			else if($msg=="Error")
+			{
+			?>
+			<br>
+			<div class="row justify-content-center text-center">
+            	<div class="col-lg-8 col-md-8 col-sm-10 col-12">
+	            	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					  <strong>Error!</strong> Your query has not sent.
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+	            </div>
+	        </div>
+			<?php
+			}
+		}
+	?>
+
     <div id="contact" class="section wb">
         <div class="container">
             <div class="section-title text-center">
@@ -162,7 +185,7 @@
                 <div class="col-xl-8 col-md-12 col-sm-12">
                     <div class="contact_form">
                         <div id="message"></div>
-                        <form id="contactform" class="" action="contact.php" name="contactform" method="post">
+                        <form id="contactform" action="src/main.php" method="post">
                             <div class="row row-fluid">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
@@ -180,7 +203,7 @@
                                     <textarea class="form-control" name="comments" id="comments" rows="6" placeholder="Give us more details.."></textarea>
                                 </div>
                                 <div class="text-center pd">
-                                    <button type="submit" value="SEND" id="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">Submit</button>
+                                    <button type="submit" value="SEND" id="submit" name="send_email" class="btn btn-light btn-radius btn-brd grd1 btn-block">Submit</button>
                                 </div>
                             </div>
                         </form>
