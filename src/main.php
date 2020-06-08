@@ -151,6 +151,16 @@
 		$rating=floor($rating/$people);
 		$sql="UPDATE user_information SET rating='$rating', people_rated='$people' where user_id='$id';";
 		$result=mysqli_query($con,$sql);
+		if(isset($_POST['message']))
+		{
+			$message=$_POST['message'];
+			$sql="SELECT * from users where user_id='$id';";
+			$res=mysqli_query($con,$sql);
+			$row=mysqli_fetch_assoc($res);
+			$email=$row['email_id'];
+			$name=$row['name'];
+			feedback($email,$message,$name);
+		}
 		if($result)
 		{
 			$url='location:../teacher_info.php?view_id='.$id.'&msg=successfully_given_feedback';
@@ -180,7 +190,8 @@
 		$res=mysqli_query($con,$sql);
 		$row=mysqli_fetch_assoc($res);
 		$to=$row['email_id'];
-		request_demo($student_name,$student_email,$student_mobile,$to);
+		$name=$row['name'];
+		request_demo($student_name,$student_email,$student_mobile,$to,$name);
 	}
 	else if(!empty($_POST['student_id_accept']))
 	{
@@ -190,6 +201,18 @@
 		$val=1;
 		$sql="UPDATE tution_request SET `is_accepted`='$val' where `student_id`='$sid' AND `tutor_id`='$id';";
 		$res=mysqli_query($con,$sql);
+		$sql="SELECT * from users where user_id='$sid';";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_fetch_assoc($result);
+		$name=$row['name'];
+		$to=$row['email_id'];
+		$sql="SELECT * from users where user_id='$id';";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_fetch_assoc($result);
+		$teacher_name=$row['name'];
+		$teacher_email=$row['email_id'];
+		$teacher_mobile=$row['mobile'];
+		request_accepted($teacher_name,$teacher_email,$teacher_mobile,$to,$name);
 	}
 	else if(!empty($_POST['student_id_decline']))
 	{
