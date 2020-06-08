@@ -10,28 +10,26 @@
 		$pass=md5($pass);
 		$sql="SELECT * from users where email_id='$email' AND password='$pass';";
 		$result=mysqli_query($con,$sql);
+		$row=mysqli_fetch_assoc($result);
 		if(mysqli_num_rows($result)==0)
 		{
 			header('location:../index.php?msg=wrong_credentials');
 		}
-		while($row=mysqli_fetch_array($result,MYSQLI_ASSOC))
+		$id=$row['user_id'];
+		$type=$row['type'];
+		if($type=="Tutor")
 		{
-			$id=$row['user_id'];
-			$type=$row['type'];
-			if($type=="Tutor")
-			{
-				session_start();
-                $_SESSION['user_id'] = $id;
-                $_SESSION['time']=time();
-				header("location:../tutor_dashboard.php?id=".$id);
-			}
-			else
-			{
-				session_start();
-                $_SESSION['user_id'] = $id;
-                $_SESSION['time']=time();
-				header("location:../student_dashboard.php?id=".$id);
-			}
+			session_start();
+            $_SESSION['user_id'] = $id;
+            $_SESSION['time']=time();
+			header("location:../tutor_dashboard.php?id=".$id);
+		}
+		else
+		{
+			session_start();
+            $_SESSION['user_id'] = $id;
+            $_SESSION['time']=time();
+			header("location:../student_dashboard.php?id=".$id);
 		}
 		
 	}
