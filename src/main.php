@@ -159,7 +159,7 @@
 			$row=mysqli_fetch_assoc($res);
 			$email=$row['email_id'];
 			$name=$row['name'];
-			feedback($email,$message,$name);
+			$val=feedback($email,$message,$name);
 		}
 		if($result)
 		{
@@ -191,7 +191,7 @@
 		$row=mysqli_fetch_assoc($res);
 		$to=$row['email_id'];
 		$name=$row['name'];
-		request_demo($student_name,$student_email,$student_mobile,$to,$name);
+		$val=request_demo($student_name,$student_email,$student_mobile,$to,$name);
 	}
 	else if(!empty($_POST['student_id_accept']))
 	{
@@ -212,7 +212,7 @@
 		$teacher_name=$row['name'];
 		$teacher_email=$row['email_id'];
 		$teacher_mobile=$row['mobile'];
-		request_accepted($teacher_name,$teacher_email,$teacher_mobile,$to,$name);
+		$val=request_accepted($teacher_name,$teacher_email,$teacher_mobile,$to,$name);
 	}
 	else if(!empty($_POST['student_id_decline']))
 	{
@@ -222,6 +222,17 @@
 		$val=-1;
 		$sql="UPDATE tution_request SET `is_accepted`='$val' where `student_id`='$sid' AND `tutor_id`='$id';";
 		$res=mysqli_query($con,$sql);
+	}
+	else if(isset($_POST['send_email']))
+	{
+		$fname=$_POST['first_name'];
+		$lname=$_POST['last_name'];
+		$email=$_POST['email'];
+		$phone=$_POST['phone'];
+		$message=$_POST['comments'];
+		$name=$fname.' '.$lname;
+		$val=contact_query($name,$email,$phone,$message);
+		header('location:../contact_us.php?msg=mail_sent_successfully');
 	}
 	else if(isset($_POST['logout']))
 	{

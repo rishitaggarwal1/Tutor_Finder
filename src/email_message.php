@@ -53,7 +53,7 @@
         		<td style="text-align: center; width: 50%;">'.$student_email.'</td>
 			</tr>
         	<tr>
-        		<td style="text-align: center; width: 50%;">Conatct Number:</td>
+        		<td style="text-align: center; width: 50%;">Contact Number:</td>
         		<td style="text-align: center; width: 50%;">'.$student_mobile.'</td>
 			</tr>
         </table>
@@ -67,7 +67,7 @@
 	                </div>
 				</body>
 				</html>';
-		send_mail($to,$subject,$message);
+		return send_mail($to,$subject,$message);
 	}
 	function request_accepted($teacher_name,$teacher_email,$teacher_mobile,$to,$name)
 	{
@@ -120,7 +120,7 @@
         		<td style="text-align: center; width: 50%;">'.$teacher_email.'</td>
 			</tr>
         	<tr>
-        		<td style="text-align: center; width: 50%;">Conatct Number:</td>
+        		<td style="text-align: center; width: 50%;">Contact Number:</td>
         		<td style="text-align: center; width: 50%;">'.$teacher_mobile.'</td>
 			</tr>
         </table>
@@ -131,7 +131,7 @@
 	                </div>
 				</body>
 				</html>';
-		send_mail($to,$subject,$message);
+		return send_mail($to,$subject,$message);
 	}
 	function feedback($to,$message,$name)
 	{
@@ -180,6 +180,68 @@
         </div>
 				</body>
 				</html>';
+		return send_mail($to,$subject,$message);
+	}
+	function contact_query($name,$email,$phone,$message)
+	{
+		$to="rishitaggarwal1@gmail.com";
+		$subject="Request for Joining Tution Classes.";
+		$message='<html>
+<head>
+    <style>
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+    
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+    .center
+    {
+    	text-align: center;
+    }
+    </style>
+</head>
+<body style="margin:0px;padding: 0px; font-family:arial, sans-serif;">
+        <div style="width:100%; background-color:#4c5a7d; text-align: center;">
+			<h1 style="font-weight: bold;color:white; font-size: 20pt;">Tutor-<span style="font-weight: bold;color:#eea412; font-size: 24pt;">Finder</span></h1>
+		</div>
+		<div>
+			<h1 style="font-weight: bold; font-size: 20pt; text-align:center;">New <span style="font-weight: bold;color:#eea412; font-size: 24pt;">New Query!</span></h1>
+		</div>
+		<br>
+        <table>
+        	<tr>
+        		<td style="text-align: center; width: 50%;">Name:</td>
+        		<td style="text-align: center; width: 50%;">'.$name.'</td>
+			</tr>
+        	<tr>
+        		<td style="text-align: center; width: 50%;">Email Id:</td>
+        		<td style="text-align: center; width: 50%;">'.$email.'</td>
+			</tr>
+        	<tr>
+        		<td style="text-align: center; width: 50%;">Contact Number:</td>
+        		<td style="text-align: center; width: 50%;">'.$phone.'</td>
+			</tr>
+        	<tr>
+        		<td style="text-align: center; width: 50%;">Query:</td>
+        		<td style="text-align: center; width: 50%;">'.$message.'</td>
+			</tr>
+        </table>
+        <br>
+       	<div  style="width:100%; height:30px; background-color:#1f1f1f; text-align: center;">  
+            <p style="color: white;"">All Rights Reserved. &copy; Design and Developed By : <a href="https://www.linkedin.com/in/rishit-aggarwal-372098180/" style="color:#F1B641;">Rishit Aggarwal</a></p>
+        </div>
+				</body>
+				</html>';
 		send_mail($to,$subject,$message);
 	}
 	function send_mail($to,$subject,$body)
@@ -203,8 +265,8 @@
 		$mail->Subject=$subject;
 		$mail->Body=$body;
 		if($mail->send())
-			echo 'sent';
+			return 1;
 		else
-			echo 'error';
+			return 0;
 	}
 ?>
