@@ -10,6 +10,6 @@
 	/*
 		Database connectivity
 	*/
-	$con =mysqli_connect($server_name, $user_name, $password) or die("Server not connected");
-	mysqli_select_db($con,"$database_name");
+	$con =mysqli_connect($server_name, $user_name, $password,$database_name) or die("Server not connected");
+	// mysqli_select_db($con,"$database_name");
 ?>

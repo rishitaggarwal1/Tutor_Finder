@@ -185,7 +185,7 @@
 	function contact_query($name,$email,$phone,$message)
 	{
 		$to="rishitaggarwal1@gmail.com";
-		$subject="Request for Joining Tution Classes.";
+		$subject="Query for Tution-Finder.";
 		$message='<html>
 <head>
     <style>
@@ -215,7 +215,7 @@
 			<h1 style="font-weight: bold;color:white; font-size: 20pt;">Tutor-<span style="font-weight: bold;color:#eea412; font-size: 24pt;">Finder</span></h1>
 		</div>
 		<div>
-			<h1 style="font-weight: bold; font-size: 20pt; text-align:center;">New <span style="font-weight: bold;color:#eea412; font-size: 24pt;">New Query!</span></h1>
+			<h1 style="font-weight: bold; font-size: 20pt; text-align:center;"><span style="font-weight: bold;color:#eea412; font-size: 24pt;">New Query!</span></h1>
 		</div>
 		<br>
         <table>
